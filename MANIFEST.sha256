@@ -1,0 +1,8 @@
+# Complete allowlist; SHA256 for every file except this manifest itself.
+# SELF MANIFEST.sha256 (self-hash intentionally omitted)
+85686b141e13692a029062ead6b0deee70e9a868222c6d5530c1a2281d626a10  LICENSE
+b346fa0fab3d1ebf134dab33e04c24d3d793ab07f6c3b2afd6a26ab018c26bad  README.en.md
+622fd66ba974167e6a070aa4f4833b70fd8e8a996ea643b399692bbffc876de7  README.md
+8b5f5f12db5e7035c31e6f39bcaa33c9669243adab162e49a1bcc683ece9e5ab  schema/laboratory.sql
+9b0908e9590e48f8b0e4efd9c35d788229fcc00eb4c334f0d27335fe215a33b7  speaker_split.py
+0780da9472d47543379645f199591057be7fbcb6f6fd6b7a2cadcb60170ccaa0  tests/test_speaker_split.py
