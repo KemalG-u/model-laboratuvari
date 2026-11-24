@@ -12,6 +12,24 @@ Bu bir şema ve konuşmacı ayrımı denetimi teknik adayıdır. Model eğitimi,
 
 Kullanıcı kendi özgün kaynak ve belgelerinin yayımlanmasına izin verdi; bu katkılar [MIT lisansı](LICENSE) kapsamındadır. `KemalG-u` sahibinin kamusal takma adıdır. Bu izin üçüncü taraf haklarını kapsamaz; üçüncü taraf haklarının kapsamı bağımsız olarak doğrulanmış değildir. Python ve SQLite çalışma zamanları ayrı dağıtılır ve kendi lisanslarına tabidir. Başvurular: [Python sqlite3](https://docs.python.org/3/library/sqlite3.html); [SQLite CREATE TABLE](https://www.sqlite.org/lang_createtable.html); [SQLite foreign keys](https://www.sqlite.org/foreignkeys.html). Bu bağlantılar belge başvurularıdır, paketlenmiş kaynak değildir. Araştırma dosyaları, gerçek ses/veri, mevcut veritabanı, sırlar ve oturum dosyaları bu adayın kapsamında değildir.
 
+## Hızlı başlangıç
+
+Sentetik konuşmacılarla denetimi denemek için aşağıdaki kodu depo klasöründe `quick_start.py` olarak kaydedip `python quick_start.py` komutuyla çalıştırın (yalnız standart kütüphane). Şemayı bellekte kurar, aynı konuşmacıyı iki bölüme koyar ve sızıntıyı yazdırır:
+
+```python
+import sqlite3
+from speaker_split import find_speaker_leaks
+
+db = sqlite3.connect(":memory:")
+db.executescript(open("schema/laboratory.sql", encoding="utf-8").read())
+db.executemany(
+    "INSERT INTO split_groups (group_key, speaker_id, session_id, source_group_id, split_name,"
+    " assignment_rule_version, assigned_at) VALUES (?, ?, ?, 'src', ?, 'v1', '2000-01-01T00:00:00Z')",
+    [("g1", "spk-a", "s1", "train"), ("g2", "spk-a", "s2", "test"), ("g3", "spk-b", "s1", "train")],
+)
+print(find_speaker_leaks(db))  # {'spk-a': ['test', 'train']}
+```
+
 ## Denetim ve sınırlar
 
 `find_speaker_leaks(connection)`, `samples` ve `split_groups` tablolarını birlikte okur; aynı birebir `speaker_id` train/development/test içinde birden çok bölüme atanmışsa kimlik ve sıralı bölümleri döndürür. Bu çıktı hassas olabilir; paylaşmayın. `require_speaker_isolation(connection)` aynı durumda kimliği içermeyen `ValueError` üretir. Boş/yalnız boşluk kimlik ve bilinmeyen bölüm hata verir. `quarantine` ve `NULL` bölüm ayrım hesabına katılmaz. Kimlikler kırpılmadan ve büyük/küçük harfe duyarlı karşılaştırılır: farklı kimliklerin aynı kişiye ait olup olmadığı anlaşılmaz. Boş veritabanının geçmesi veri kümesinin hazır olduğu anlamına gelmez.
