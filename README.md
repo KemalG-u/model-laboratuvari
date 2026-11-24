@@ -1,3 +1,5 @@
+> 🚧 **Durum: aktif geliştirme.** Yazarın kullanımında çalışır; arayüzler değişebilir.
+
 # Model Laboratuvarı — şema ve konuşmacı ayrımı adayı
 
 Bu bir şema ve konuşmacı ayrımı denetimi teknik adayıdır. Model eğitimi, ses işleme veya gerçek veri kümesi değildir. Faz 0 araştırma kararları deney sonucu veya performans ölçümü değildir.
