@@ -1,6 +1,6 @@
 > 🚧 **Status: active development.** It works for the author; interfaces may change.
 
-# Model Laboratory — schema and speaker-isolation candidate
+# Model Laboratory — SQL schema and speaker-leakage checker
 
 This is a technical candidate for schema and speaker-isolation validation. It is not model training, audio processing, or a real dataset. Phase 0 research decisions are not measured performance or experimental results.
 
